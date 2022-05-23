@@ -213,6 +213,16 @@
                     <a href="{{ route('show-thread') }}"
                         class="font-medium navigation block py-2 px-4 {{ request()->is('discussion') ? 'active-navbar' : '' }}">Discussion</a>
                 </li>
+                @guest
+                    <li class="text-base">
+                        <a href="{{ route('show-register') }}"
+                            class="block px-4 py-2 font-medium md:hidden navigation">Login</a>
+                    </li>
+                    <li class="text-base">
+                        <a href="{{ route('show-login') }}"
+                            class="block px-4 py-2 font-medium md:hidden navigation">Register</a>
+                    </li>
+                @endguest
                 @auth
                     <li class="text-base">
                         <a href="{{ route('show-request') }}"

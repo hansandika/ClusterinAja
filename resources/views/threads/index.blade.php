@@ -83,8 +83,8 @@
                     </ul>
                 </div>
             </div>
-            <div class="flex flex-col items-center col-span-3 gap-6 py-8 md:py-12 md:col-span-2 md:gap-12">
-                <div class="flex items-center justify-between w-full pb-2 border-b-2">
+            <div class="flex flex-col items-center col-span-3 gap-6 py-8 md:py-12 md:col-span-2 md:gap-8">
+                <div class="flex items-center justify-between w-full pb-2 border-b-2 md:hidden">
                     <h2 class="text-2xl font-bold">All discussion</h2>
                     <a href="{{ route('create-thread') }}" type="button"
                         class="@guest hidden @endguest text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 md:px-5 md:py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Create
