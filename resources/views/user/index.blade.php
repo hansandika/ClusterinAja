@@ -8,7 +8,7 @@
                 <div id="image-profile" class="-mt-24 bg-white border-2 rounded-full white border1">
                     @if (Auth::user()->profile_image)
                         <div data-modal-toggle="defaultModal" class="cursor-pointer">
-                            <img class="block object-cover w-40 h-40 md:w-64 md:h-64"
+                            <img class="block object-cover w-36 h-36 md:w-64 md:h-64"
                                 src="{{ asset('storage/profile-pictures/' . Auth::user()->profile_image) }}" alt="">
                         </div>
                         <div id="defaultModal" tabindex="-1" aria-hidden="true"

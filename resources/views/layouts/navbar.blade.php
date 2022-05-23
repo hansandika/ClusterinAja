@@ -215,11 +215,11 @@
                 </li>
                 @guest
                     <li class="text-base">
-                        <a href="{{ route('show-register') }}"
+                        <a href="{{ route('show-login') }}"
                             class="block px-4 py-2 font-medium md:hidden navigation">Login</a>
                     </li>
                     <li class="text-base">
-                        <a href="{{ route('show-login') }}"
+                        <a href="{{ route('show-register') }}"
                             class="block px-4 py-2 font-medium md:hidden navigation">Register</a>
                     </li>
                 @endguest
