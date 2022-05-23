@@ -4,32 +4,52 @@
             <div class="flex items-center justify-between pb-2 border-b-2">
                 <h2 class="text-2xl font-bold">My Request</h2>
                 <a href="{{ route('create-request') }}" type="button"
-                    class="@guest hidden @endguest text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Create
+                    class="@guest hidden @endguest text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 md:px-5 md:py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Create
                     Request</a>
             </div>
-            <div class="flex items-center gap-4 pt-5">
+            <div class="flex flex-col items-start gap-4 pt-5 md:items-center md:flex-row">
                 <p class="text-black-200">{{ $requests->total() }} Requests</p>
-                <a href="{{ route('show-request', 'category=Newest') }}" type="button"
-                    class="{{ Request::get('category') == 'Newest' || !Request::get('category') ? 'text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-600 dark:focus:ring-blue-700' : 'text-blue-700 bg-blue-200 hover:bg-blue-300 focus:ring-blue-600' }} focus:ring-2 font-medium rounded-full text-sm px-5 py-2.5 focus:outline-none">Newest</a>
-                <a href="{{ route('show-request', 'category=Help') }}" type="button"
-                    class="{{ Request::get('category') == 'Help' ? 'text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-600 dark:focus:ring-blue-700' : 'text-blue-700 bg-blue-200 hover:bg-blue-300 focus:ring-blue-600' }} focus:ring-2 font-medium rounded-full text-sm px-5 py-2.5 focus:outline-none">Help</a>
-                <a href="{{ route('show-request', 'category=Maintanance') }}" type="button"
-                    class="{{ Request::get('category') == 'Maintanance' ? 'text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-600 dark:focus:ring-blue-700' : 'text-blue-700 bg-blue-200 hover:bg-blue-300 focus:ring-blue-600' }} focus:ring-2 font-medium rounded-full text-sm px-5 py-2.5 focus:outline-none">Maintanance</a>
-                <a href="{{ route('show-request', 'category=Repair') }}" type="button"
-                    class="{{ Request::get('category') == 'Repair' ? 'text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-600 dark:focus:ring-blue-700' : 'text-blue-700 bg-blue-200 hover:bg-blue-300 focus:ring-blue-600' }} focus:ring-2 font-medium rounded-full text-sm px-5 py-2.5 focus:outline-none">Repair</a>
+                <div class="flex flex-wrap items-center gap-4">
+                    <a href="{{ route('show-request', 'category=Newest') }}" type="button"
+                        class="{{ Request::get('category') == 'Newest' || !Request::get('category') ? 'text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-600 dark:focus:ring-blue-700' : 'text-blue-700 bg-blue-200 hover:bg-blue-300 focus:ring-blue-600' }} focus:ring-2 font-medium rounded-full text-sm px-5 py-2.5 focus:outline-none">Newest</a>
+                    <a href="{{ route('show-request', 'category=Help') }}" type="button"
+                        class="{{ Request::get('category') == 'Help' ? 'text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-600 dark:focus:ring-blue-700' : 'text-blue-700 bg-blue-200 hover:bg-blue-300 focus:ring-blue-600' }} focus:ring-2 font-medium rounded-full text-sm px-5 py-2.5 focus:outline-none">Help</a>
+                    <a href="{{ route('show-request', 'category=Maintanance') }}" type="button"
+                        class="{{ Request::get('category') == 'Maintanance' ? 'text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-600 dark:focus:ring-blue-700' : 'text-blue-700 bg-blue-200 hover:bg-blue-300 focus:ring-blue-600' }} focus:ring-2 font-medium rounded-full text-sm px-5 py-2.5 focus:outline-none">Maintanance</a>
+                    <a href="{{ route('show-request', 'category=Repair') }}" type="button"
+                        class="{{ Request::get('category') == 'Repair' ? 'text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-600 dark:focus:ring-blue-700' : 'text-blue-700 bg-blue-200 hover:bg-blue-300 focus:ring-blue-600' }} focus:ring-2 font-medium rounded-full text-sm px-5 py-2.5 focus:outline-none">Repair</a>
+                </div>
             </div>
-            <div class="flex flex-col items-center max-w-sm gap-6 py-16 mx-auto md:max-w-md lg:max-w-4xl md:gap-12">
+            <div
+                class="flex flex-col items-center max-w-sm gap-6 py-8 mx-auto md:py-12 md:max-w-md lg:max-w-4xl md:gap-12">
                 @forelse ($requests as $request)
                     <div
                         class="w-full p-6 space-y-2 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-4">
+                        <div class="flex flex-col items-center justify-between w-full gap-2 md:flex-row">
+                            <div class="flex flex-col items-start w-full gap-2 md:gap-4 md:items-center md:flex-row">
                                 <h2
                                     class="max-w-md text-2xl font-bold tracking-tight md:max-w-lg text-black-800 dark:text-white">
                                     {{ ucfirst($request->title) }}</h2>
                                 <p class="text-sm text-black-200">{{ $request->updated_at->diffForHumans() }}</p>
+                                <div class="flex gap-2 md:hidden">
+                                    <a href="{{ route('show-request', 'category=' . ucfirst($request->requestCategory->name)) }}"
+                                        type="button"
+                                        class="text-sm font-medium text-center text-blue-700">{{ ucfirst($request->requestCategory->name) }}</a>
+                                    @if ($request->status == 1)
+                                        <a href="{{ route('show-request', 'status=Finished') }}" type="button"
+                                            class="text-sm font-medium text-center text-green-700">Finished</a>
+                                    @elseif($request->status == 2)
+                                        <a href="{{ route('show-request', 'status=In-Progress') }}" type="button"
+                                            class="text-sm font-medium text-center text-blue-700">In
+                                            Progress</a>
+                                    @elseif($request->status == 3)
+                                        <a href="{{ route('show-request', 'status=Not-Finished') }}" type="button"
+                                            class="text-sm font-medium text-center text-rose-500">Not
+                                            Finished</a>
+                                    @endif
+                                </div>
                             </div>
-                            <div class="flex items-center gap-2">
+                            <div class="items-center hidden gap-2 md:flex">
                                 <a href="{{ route('show-request', 'category=' . ucfirst($request->requestCategory->name)) }}"
                                     type="button"
                                     class="text-blue-700 bg-blue-200 hover:bg-blue-300 focus:ring-blue-600 focus:outline-none focus:ring-2 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-rose-600">{{ ucfirst($request->requestCategory->name) }}</a>
@@ -105,7 +125,8 @@
                                 </div>
                             </div>
                         @endif
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $request->description }}</p>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                            {{ Str::limit($request->description, 125) }}</p>
                     </div>
                 @empty
                     <h2 class="text-2xl text-red-500">There are no request yet!</h2>

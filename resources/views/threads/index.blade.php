@@ -83,7 +83,13 @@
                     </ul>
                 </div>
             </div>
-            <div class="flex flex-col items-center col-span-3 gap-6 py-16 md:col-span-2 md:gap-12">
+            <div class="flex flex-col items-center col-span-3 gap-6 py-8 md:py-12 md:col-span-2 md:gap-12">
+                <div class="flex items-center justify-between w-full pb-2 border-b-2">
+                    <h2 class="text-2xl font-bold">All discussion</h2>
+                    <a href="{{ route('create-thread') }}" type="button"
+                        class="@guest hidden @endguest text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 md:px-5 md:py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Create
+                        Discussion</a>
+                </div>
                 <form class="flex items-center w-full">
                     @if (Request::get('category'))
                         <input type="hidden" value="{{ Request::get('category') }}" name="category">
@@ -113,33 +119,58 @@
                 @forelse ($threads as $thread)
                     <div
                         class="w-full p-6 space-y-2 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-4">
+                        <div class="flex flex-col items-start justify-between md:flex-row md:items-center">
+                            <div class="flex flex-col items-start gap-0.5 md:gap-4 md:flex-row md:items-center">
                                 <a href="{{ route('show-specific-thread', $thread->slug) }}"
                                     class="max-w-md text-2xl font-bold tracking-tight md:max-w-lg text-black-800 dark:text-white">{{ ucfirst($thread->title) }}</a>
                                 <p class="text-sm text-black-200">{{ $thread->updated_at->diffForHumans() }}</p>
+                                <div class="block md:hidden">
+                                    @if ($thread->threadCategory->name == 'Watery')
+                                        <a href="{{ route('show-thread', 'category=' . $thread->threadCategory->name) }}"
+                                            type="button"
+                                            class="text-sm font-medium text-center text-blue-700 hover:text-blue-800 dark:text-blue-600 dark:hover:text-blue-700">{{ $thread->threadCategory->name }}</a>
+                                    @elseif($thread->threadCategory->name == 'Electricity')
+                                        <a href="{{ route('show-thread', 'category=' . $thread->threadCategory->name) }}"
+                                            type="button"
+                                            class="text-sm font-medium text-center text-yellow-400 hover:text-yellow-500 dark:text-yellow-600 dark:hover:text-yellow-700">{{ $thread->threadCategory->name }}</a>
+                                    @elseif($thread->threadCategory->name == 'Financial')
+                                        <a href="{{ route('show-thread', 'category=' . $thread->threadCategory->name) }}"
+                                            type="button"
+                                            class="text-sm font-medium text-center text-green-700 hover:text-green-800 dark:text-green-600 dark:hover:text-green-700">{{ $thread->threadCategory->name }}</a>
+                                    @elseif($thread->threadCategory->name == 'Other')
+                                        <a href="{{ route('show-thread', 'category=' . $thread->threadCategory->name) }}"
+                                            type="button"
+                                            class="text-sm font-medium text-center text-violet-400 hover:text-violet-500 dark:text-violet-600 dark:hover:text-violet-700">{{ $thread->threadCategory->name }}</a>
+                                    @else
+                                        <a href="{{ route('show-thread', 'category=' . $thread->threadCategory->name) }}"
+                                            type="button"
+                                            class="text-sm font-medium text-center text-rose-500 hover:text-rose-600 dark:text-rose-600 dark:hover:text-rose-700 dark:focus:ring-rose-800">{{ $thread->threadCategory->name }}</a>
+                                    @endif
+                                </div>
                             </div>
-                            @if ($thread->threadCategory->name == 'Watery')
-                                <a href="{{ route('show-thread', 'category=' . $thread->threadCategory->name) }}"
-                                    type="button"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{{ $thread->threadCategory->name }}</a>
-                            @elseif($thread->threadCategory->name == 'Electricity')
-                                <a href="{{ route('show-thread', 'category=' . $thread->threadCategory->name) }}"
-                                    type="button"
-                                    class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">{{ $thread->threadCategory->name }}</a>
-                            @elseif($thread->threadCategory->name == 'Financial')
-                                <a href="{{ route('show-thread', 'category=' . $thread->threadCategory->name) }}"
-                                    type="button"
-                                    class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">{{ $thread->threadCategory->name }}</a>
-                            @elseif($thread->threadCategory->name == 'Other')
-                                <a href="{{ route('show-thread', 'category=' . $thread->threadCategory->name) }}"
-                                    type="button"
-                                    class="text-white bg-violet-400 hover:bg-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-violet-800">{{ $thread->threadCategory->name }}</a>
-                            @else
-                                <a href="{{ route('show-thread', 'category=' . $thread->threadCategory->name) }}"
-                                    type="button"
-                                    class="text-white bg-rose-500 hover:bg-rose-600 focus:outline-none focus:ring-4 focus:ring-rose-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800">{{ $thread->threadCategory->name }}</a>
-                            @endif
+                            <div class="hidden md:block">
+                                @if ($thread->threadCategory->name == 'Watery')
+                                    <a href="{{ route('show-thread', 'category=' . $thread->threadCategory->name) }}"
+                                        type="button"
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{{ $thread->threadCategory->name }}</a>
+                                @elseif($thread->threadCategory->name == 'Electricity')
+                                    <a href="{{ route('show-thread', 'category=' . $thread->threadCategory->name) }}"
+                                        type="button"
+                                        class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">{{ $thread->threadCategory->name }}</a>
+                                @elseif($thread->threadCategory->name == 'Financial')
+                                    <a href="{{ route('show-thread', 'category=' . $thread->threadCategory->name) }}"
+                                        type="button"
+                                        class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">{{ $thread->threadCategory->name }}</a>
+                                @elseif($thread->threadCategory->name == 'Other')
+                                    <a href="{{ route('show-thread', 'category=' . $thread->threadCategory->name) }}"
+                                        type="button"
+                                        class="text-white bg-violet-400 hover:bg-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-violet-800">{{ $thread->threadCategory->name }}</a>
+                                @else
+                                    <a href="{{ route('show-thread', 'category=' . $thread->threadCategory->name) }}"
+                                        type="button"
+                                        class="text-white bg-rose-500 hover:bg-rose-600 focus:outline-none focus:ring-4 focus:ring-rose-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800">{{ $thread->threadCategory->name }}</a>
+                                @endif
+                            </div>
                         </div>
                         <div class="flex items-center gap-4">
                             @if ($thread->user->profile_image)
@@ -185,7 +216,8 @@
                                 </div>
                             </div>
                         @endif
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $thread->description }}</p>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                            {{ Str::limit($thread->description, 125) }}</p>
                     </div>
                 @empty
                     <h2 class="text-2xl text-red-500">There are no discussion yet!</h2>

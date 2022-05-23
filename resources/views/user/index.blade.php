@@ -5,7 +5,7 @@
     <div class="mx-auto bg-blue-100 x-6 md:px-16">
         <div class="relative pt-4">
             <div class="flex gap-4">
-                <div id="image-profile" class="-mt-24 bg-white border-2 border-white rounded-full">
+                <div id="image-profile" class="-mt-24 bg-white border-2 rounded-full white border1">
                     @if (Auth::user()->profile_image)
                         <div data-modal-toggle="defaultModal" class="cursor-pointer">
                             <img class="block object-cover w-40 h-40 md:w-64 md:h-64"
@@ -51,7 +51,7 @@
                     class="hidden md:block absolute right-0 top-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"><i
                         class="fas fa-save"></i> Save
                     Changes</button>
-                <div class="container max-w-sm py-8 mx-auto space-y-6 md:pt-12 md:max-w-lg">
+                <div class="container max-w-sm px-4 py-8 mx-auto space-y-6 md:px-0 md:pt-12 md:max-w-lg">
                     <div>
                         <label for="email-address-icon"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your Email</label>

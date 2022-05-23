@@ -62,7 +62,7 @@
                                 <div class="px-4 py-2 text-white bg-blue-500 rounded-full md:py-1">
                                     01
                                 </div>
-                                <h3 class="text-base font-bold md:mb-4 md:hidden">
+                                <h3 class="text-base font-bold text-white md:text-black-800 md:mb-4 md:hidden">
                                     Getting services become easier
                                 </h3>
                             </div>
@@ -85,7 +85,7 @@
                                 <div class="px-4 py-2 text-white bg-blue-500 rounded-full md:py-1">
                                     02
                                 </div>
-                                <h3 class="text-base font-bold md:mb-4 md:hidden">
+                                <h3 class="text-base font-bold text-white md:text-black-800 md:mb-4 md:hidden">
                                     Ease of Use
                                 </h3>
                             </div>
@@ -107,13 +107,13 @@
                                 <div class="px-4 py-2 text-white bg-blue-500 rounded-full md:py-1">
                                     03
                                 </div>
-                                <h3 class="text-base font-bold md:mb-4 md:hidden">
+                                <h3 class="text-base font-bold text-white md:text-black-800 md:mb-4 md:hidden">
                                     Everything you need in one place
                                 </h3>
                             </div>
                         </div>
                         <div>
-                            <h3 class="hidden mb-4 text-lg font-bold md:block">
+                            <h3 class="hidden mb-4 text-lg font-bold text-white md:text-black-800 md:block">
                                 Everything you need in one place
                             </h3>
                             <p class="text-black-400">
