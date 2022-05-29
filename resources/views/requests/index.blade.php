@@ -49,7 +49,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="items-center hidden gap-2 md:flex">
+                            <div class="items-center hidden gap-2 md:flex min-w-fit">
                                 <a href="{{ route('show-request', 'category=' . ucfirst($request->requestCategory->name)) }}"
                                     type="button"
                                     class="text-blue-700 bg-blue-200 hover:bg-blue-300 focus:ring-blue-600 focus:outline-none focus:ring-2 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-rose-600">{{ ucfirst($request->requestCategory->name) }}</a>
