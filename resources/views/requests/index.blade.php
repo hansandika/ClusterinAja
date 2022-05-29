@@ -82,9 +82,9 @@
                             @endcan
                         </div>
                         <div class="flex items-center gap-4">
-                            @if (Auth::user()->profile_image)
+                            @if ($request->user->profile_image)
                                 <img class="object-cover w-8 h-8 rounded-full"
-                                    src="{{ asset('storage/profile-pictures/' . Auth::user()->profile_image) }}"
+                                    src="{{ asset('storage/profile-pictures/' . $request->user->profile_image) }}"
                                     alt="">
                             @else
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-gray-400"
@@ -96,8 +96,8 @@
                             @endif
                             <div>
                                 <h2 class="text-lg">
-                                    {{ substr(Auth::user()->email, 0, strpos(Auth::user()->email, '@')) }}</h2>
-                                <p class="text-sm text-black-200">{{ Auth::user()->cluster->name }}</p>
+                                    {{ substr($request->user->email, 0, strpos($request->user->email, '@')) }}</h2>
+                                <p class="text-sm text-black-200">{{ $request->user->cluster->name }}</p>
                             </div>
                         </div>
                         @if ($request->request_image)

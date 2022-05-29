@@ -40,7 +40,7 @@ class ThreadController extends Controller
         }
 
         if (Auth::user()->isAdmin()) {
-            $requests = Thread::orderBy('updated_at', 'DESC')->paginate(4);
+            $threads = Thread::orderBy('updated_at', 'DESC')->paginate(4);
         }
 
         return view('threads.index', compact('threads'));
