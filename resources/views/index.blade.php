@@ -1,5 +1,5 @@
 <x-app-layout title='Home'>
-    <div class="px-6 mx-auto bg-blue-100 md:px-16">
+    <div class="px-6 mx-auto md:px-16">
         <section id="hero" class="container py-8">
             <div class="flex flex-col-reverse items-center justify-between md:flex-row">
                 <div class="flex flex-col items-center gap-8 md:gap-12 md:items-start">

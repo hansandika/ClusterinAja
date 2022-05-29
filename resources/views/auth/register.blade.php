@@ -1,5 +1,5 @@
 <x-app-layout title='Register'>
-    <div class="flex items-center justify-center min-h-full px-4 py-12 bg-blue-100 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-center min-h-full px-4 py-12 sm:px-6 lg:px-8">
         <div class="w-full max-w-lg px-8 py-8 space-y-8 bg-white rounded-md shadow">
             <div class="space-y-2">
                 <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Register</h2>
@@ -108,7 +108,7 @@
                                     clip-rule="evenodd" />
                             </svg>
                         </span>
-                        Sign in
+                        Sign up
                     </button>
                 </div>
             </form>

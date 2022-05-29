@@ -2,7 +2,7 @@
     <div class="w-full h-36 md:h-52">
         <img src="https://picsum.photos/1920" class="object-cover w-full h-full">
     </div>
-    <div class="mx-auto bg-blue-100 x-6 md:px-16">
+    <div class="mx-auto x-6 md:px-16">
         <div class="relative pt-4">
             <div class="flex gap-4">
                 <div id="image-profile" class="-mt-24 bg-white border-2 rounded-full white border1">

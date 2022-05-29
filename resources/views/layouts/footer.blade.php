@@ -2,8 +2,8 @@
     <div class="container flex flex-col items-center justify-between gap-8 md:flex-row">
         <div class="flex space-x-4">
             <a href="{{ route('show-home') }}" class="font-medium">Home</a>
-            <a href="{{ route('show-thread') }}" class="font-medium">Discussion</a>
             @auth
+                <a href="{{ route('show-thread') }}" class="font-medium">Discussion</a>
                 <a href="{{ route('show-request') }}" class="font-medium">Request</a>
             @endauth
         </div>

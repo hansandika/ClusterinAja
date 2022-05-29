@@ -13,17 +13,18 @@ class ThreadController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth');
     }
 
     public function index(Request $request)
     {
         $threads = null;
+        $user = Auth::user();
 
         if ($request->search) {
-            $threads = Thread::where('title', 'LIKE', '%' . $request->search . '%');
+            $threads = Thread::where('title', 'LIKE', '%' . $request->search . '%')->where('cluster_id', $user->cluster_id);
         } else {
-            $threads = Thread::where('title', 'LIKE', '%' . '%');
+            $threads = Thread::where('title', 'LIKE', '%' . '%')->where('cluster_id', $user->cluster_id);
         }
 
         if ($request->category == 'Watery') {
@@ -56,6 +57,8 @@ class ThreadController extends Controller
             'image' => ['mimes:jpeg,jpg,png,gif']
         ]);
 
+        $user = Auth::user();
+        $attr['cluster_id'] = $user->cluster_id;
         $attr['user_id'] = Auth::id();
         $attr['slug'] = \Str::slug($attr['title']);
         $attr['thread_category_id'] = $attr['type'];

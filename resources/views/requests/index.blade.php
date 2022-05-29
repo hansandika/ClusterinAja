@@ -1,5 +1,5 @@
 <x-app-layout title="Request">
-    <div class="px-6 mx-auto bg-blue-100 md:px-16">
+    <div class="px-6 mx-auto md:px-16">
         <div class="container py-8">
             <div class="flex items-center justify-between pb-2 border-b-2">
                 <h2 class="text-2xl font-bold">My Request</h2>

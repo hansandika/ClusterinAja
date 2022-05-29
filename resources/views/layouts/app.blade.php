@@ -21,8 +21,10 @@
 
 <body>
     <x-navbar />
-    <x-alert />
-    {{ $slot }}
+    <main class="bg-blue-100 min-h-screen">
+        <x-alert />
+        {{ $slot }}
+    </main>
     <x-footer />
     <script src="https://unpkg.com/flowbite@1.4.5/dist/flowbite.js"></script>
     <script src="https://unpkg.com/flowbite@1.4.5/dist/datepicker.js"></script>

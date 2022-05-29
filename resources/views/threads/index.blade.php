@@ -1,5 +1,5 @@
 <x-app-layout title="Discussion">
-    <div class="px-6 mx-auto bg-blue-100 md:px-16">
+    <div class="px-6 mx-auto md:px-16">
         <div class="container grid grid-cols-3 gap-8">
             <div class="flex-col items-center hidden gap-6 py-16 md:flex md:gap-12">
                 <a href="{{ route('create-thread') }}"

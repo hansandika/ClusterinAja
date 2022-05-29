@@ -9,7 +9,7 @@ class Thread extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'user_id', 'slug', 'description', 'thread_category_id', 'thread_image'];
+    protected $fillable = ['title', 'user_id', 'slug', 'description', 'cluster_id', 'thread_category_id', 'thread_image'];
     protected $with = ['threadCategory', 'user', 'comments'];
 
     public function threadCategory()

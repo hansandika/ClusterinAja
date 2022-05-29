@@ -34,12 +34,12 @@ Route::prefix('/register')->group(function () {
 });
 
 Route::prefix('/discussion')->middleware('auth')->group(function () {
-    Route::get('/', [ThreadController::class, 'index'])->name('show-thread')->withoutMiddleware('auth');
+    Route::get('/', [ThreadController::class, 'index'])->name('show-thread');
     Route::get('/create', [ThreadController::class, 'create'])->name('create-thread');
     Route::post('/create', [ThreadController::class, 'store'])->name('store-thread');
     Route::get('/edit/{thread}', [ThreadController::class, 'edit'])->name('edit-thread');
     Route::patch('/edit/{thread}', [ThreadController::class, 'update'])->name('update-thread');
-    Route::get('/{thread:slug}', [ThreadController::class, 'show'])->name('show-specific-thread')->withoutMiddleware('auth');
+    Route::get('/{thread:slug}', [ThreadController::class, 'show'])->name('show-specific-thread');
     Route::delete("/{thread}", [ThreadController::class, 'destroy'])->name('delete-thread');
 });
 

@@ -16,11 +16,12 @@ return new class extends Migration
         Schema::create('threads', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('cluster_id')->constrained();
+            $table->foreignId('thread_category_id')->constrained();
             $table->string('title');
             $table->string('slug');
             $table->longText('thread_image')->nullable();
             $table->longText('description');
-            $table->foreignId('thread_category_id')->constrained();
             $table->timestamps();
         });
     }

@@ -1,5 +1,5 @@
 <x-app-layout title='{{ $thread->title }}'>
-    <div class="px-6 mx-auto bg-blue-100 md:px-16">
+    <div class="px-6 mx-auto md:px-16">
         <div class="container grid grid-cols-3 gap-8 py-16">
             <div class="col-span-3 space-y-6 md:col-span-2">
                 <div class="p-6 space-y-2 bg-white border border-gray-200 rounded-lg shadow-md">
