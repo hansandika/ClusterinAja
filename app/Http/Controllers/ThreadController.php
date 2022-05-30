@@ -22,10 +22,19 @@ class ThreadController extends Controller
         $user = Auth::user();
 
         if ($request->search) {
-            $threads = Thread::where('title', 'LIKE', '%' . $request->search . '%')->where('cluster_id', $user->cluster_id);
+            if (Auth::user()->isAdmin()) {
+                $threads = Thread::where('title', 'LIKE', '%' . $request->search . '%');
+            } else {
+                $threads = Thread::where('title', 'LIKE', '%' . $request->search . '%')->where('cluster_id', $user->cluster_id);
+            }
         } else {
-            $threads = Thread::where('title', 'LIKE', '%' . '%')->where('cluster_id', $user->cluster_id);
+            if (Auth::user()->isAdmin()) {
+                $threads = Thread::where('title', 'LIKE', '%' . '%');
+            } else {
+                $threads = Thread::where('title', 'LIKE', '%' . '%')->where('cluster_id', $user->cluster_id);
+            }
         }
+
 
         if ($request->category == 'Watery') {
             $threads = $threads->where('thread_category_id', 1)->orderBy('updated_at', 'DESC')->paginate(4);
@@ -37,10 +46,6 @@ class ThreadController extends Controller
             $threads = $threads->where('thread_category_id', 4)->orderBy('updated_at', 'DESC')->paginate(4);
         } else {
             $threads = $threads->orderBy('updated_at', 'DESC')->paginate(4);
-        }
-
-        if (Auth::user()->isAdmin()) {
-            $threads = Thread::orderBy('updated_at', 'DESC')->paginate(4);
         }
 
         return view('threads.index', compact('threads'));

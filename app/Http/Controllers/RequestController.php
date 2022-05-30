@@ -19,18 +19,20 @@ class RequestController extends Controller
     {
         $requests = null;
 
-        if ($browserRequest->category == 'Help') {
-            $requests = Request::where('user_id', Auth::id())->where('request_category_id', 1)->orderBy('updated_at', 'DESC')->paginate(4);
-        } else if ($browserRequest->category == 'Maintanance') {
-            $requests = Request::where('user_id', Auth::id())->where('request_category_id', 2)->orderBy('updated_at', 'DESC')->paginate(4);
-        } else if ($browserRequest->category == 'Repair') {
-            $requests = Request::where('user_id', Auth::id())->where('request_category_id', 3)->orderBy('updated_at', 'DESC')->paginate(4);
+        if (Auth::user()->isAdmin()) {
+            $requests = Request::where('title', 'LIKE', '%' . '%');
         } else {
-            $requests = Request::where('user_id', Auth::id())->orderBy('updated_at', 'DESC')->paginate(4);
+            $requests = Request::where('user_id', Auth::id());
         }
 
-        if (Auth::user()->isAdmin()) {
-            $requests = Request::orderBy('updated_at', 'DESC')->paginate(4);
+        if ($browserRequest->category == 'Help') {
+            $requests = $requests->where('request_category_id', 1)->orderBy('updated_at', 'DESC')->paginate(4);
+        } else if ($browserRequest->category == 'Maintanance') {
+            $requests = $requests->where('request_category_id', 2)->orderBy('updated_at', 'DESC')->paginate(4);
+        } else if ($browserRequest->category == 'Repair') {
+            $requests = $requests->where('request_category_id', 3)->orderBy('updated_at', 'DESC')->paginate(4);
+        } else {
+            $requests = $requests->orderBy('updated_at', 'DESC')->paginate(4);
         }
 
         return view('requests.index', compact('requests'));
