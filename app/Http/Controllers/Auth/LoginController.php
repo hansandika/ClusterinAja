@@ -72,10 +72,8 @@ class LoginController extends Controller
                 'provider' => $provider,
                 'provider_id' => $socialiteUser->getId(),
             ]);
-
-
-            Auth::login($user);
-            return redirect('/');
         }
+        Auth::login($user);
+        return redirect('/');
     }
 }
