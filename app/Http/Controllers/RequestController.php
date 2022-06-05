@@ -34,7 +34,6 @@ class RequestController extends Controller
         } else {
             $requests = $requests->orderBy('updated_at', 'DESC')->paginate(4);
         }
-
         return view('requests.index', compact('requests'));
     }
 
@@ -59,7 +58,8 @@ class RequestController extends Controller
         if ($browserRequest->file('image')) {
             $file = $browserRequest->file('image');
             $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('storage/requests'), $filename);
+            $filePath = 'requests/' . $filename;
+            $path = Storage::disk('s3')->put($filePath, file_get_contents($file));
             $attr['request_image'] = $filename;
         }
         Request::create($attr);
@@ -90,11 +90,12 @@ class RequestController extends Controller
 
         if ($browserRequest->file('image')) {
             if ($request->request_image) {
-                Storage::delete('public/requests/' . $request->request_image);
+                Storage::disk('s3')->delete('requests/' . $request->request_image);
             }
             $file = $browserRequest->file('image');
             $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('storage/requests'), $filename);
+            $filePath = 'requests/' . $filename;
+            $path = Storage::disk('s3')->put($filePath, file_get_contents($file));
             $attr['request_image'] = $filename;
         }
 
@@ -107,7 +108,7 @@ class RequestController extends Controller
         $this->authorize('delete', $request);
 
         if ($request->request_image) {
-            Storage::delete('public/requests/' . $request->request_image);
+            Storage::disk('s3')->delete('requests/' . $request->request_image);
         }
         $request->delete();
         return redirect('/request')->with('success-info', 'Delete discussion Successfully');

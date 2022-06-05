@@ -12,6 +12,11 @@ class Thread extends Model
     protected $fillable = ['title', 'user_id', 'slug', 'description', 'cluster_id', 'thread_category_id', 'thread_image'];
     protected $with = ['threadCategory', 'user', 'comments'];
 
+    public function getImageAttribute()
+    {
+        return 'https://clusterinajabucket.s3.amazonaws.com/threads/' . $this->thread_image;
+    }
+
     public function threadCategory()
     {
         return $this->belongsTo(ThreadCategory::class);

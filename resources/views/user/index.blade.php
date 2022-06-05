@@ -8,15 +8,14 @@
                 <div id="image-profile" class="-mt-24 bg-white border-2 rounded-full white border1">
                     @if (Auth::user()->profile_image)
                         <div data-modal-toggle="defaultModal" class="cursor-pointer">
-                            <img class="block object-cover w-36 h-36 md:w-64 md:h-64"
-                                src="{{ asset('storage/profile-pictures/' . Auth::user()->profile_image) }}" alt="">
+                            <img class="block object-cover w-36 h-36 md:w-64 md:h-64" src="{{ Auth::user()->image }}"
+                                alt="">
                         </div>
                         <div id="defaultModal" tabindex="-1" aria-hidden="true"
                             class="fixed top-0 left-0 right-0 z-50 hidden w-full overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
                             <!-- Modal content -->
                             <div class="relative block max-w-2xl mx-auto bg-white rounded-lg shadow dark:bg-gray-700">
-                                <img src="{{ asset('storage/profile-pictures/' . Auth::user()->profile_image) }}"
-                                    class="object-cover w-auto h-screen" alt="">
+                                <img src="{{ Auth::user()->image }}" class="object-cover w-auto h-screen" alt="">
                                 <button type="button"
                                     class="absolute right-0 top-0 text-gray-400 bg-gray-100 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                                     data-modal-toggle="defaultModal">
@@ -39,7 +38,8 @@
                     @endif
                 </div>
                 <div class="space-y-2">
-                    <h2 class="text-2xl font-bold">{{ substr($user->email, 0, strpos($user->email, '@')) }}</h2>
+                    <h2 class="text-2xl font-bold">{{ $user->name }}
+                    </h2>
                     <a href="mailto: {{ $user->email }}"
                         class="text-sm text-blue-500 hover:underline hover:text-blue-700">{{ '@' . $user->email }}</a>
                 </div>
@@ -106,7 +106,7 @@
                                 required
                                 class="{{ $errors->first('dob') ? 'bg-red-50 border border-red-500 text-red-900 placeholder-red-700' : 'text-gray-900  placeholder-gray-500 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 ' }} sm:text-sm rounded-lg block w-full pl-10 p-2.5"
                                 placeholder="MM / DD / YYYY"
-                                value="{{ old('dob', date('m/d/Y', strtotime($user->dob))) }}">
+                                value="{{ old('dob', $user->dob ? date('m/d/Y', strtotime($user->dob)) : date('m/d/Y', time())) }}">
                         </div>
                         @error('dob')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
@@ -142,11 +142,27 @@
                     </div>
                     <div>
                         <label for="cluster"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Cluster</label>
-                        <select id="cluster" name="cluster" disabled
-                            class="bg-gray-100 text-gray-900  placeholder-gray-500 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 sm:text-sm rounded-lg block w-full p-2.5">
-                            <option disabled selected>{{ $user->cluster->name }}</option>
-                        </select>
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Cluster<span
+                                class="text-red-500">*</span></label>
+                        @if ($user->cluster)
+                            <select id="cluster" name="cluster" disabled
+                                class="bg-gray-100 text-gray-900  placeholder-gray-500 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 sm:text-sm rounded-lg block w-full p-2.5">
+                                <option disabled selected>{{ $user->cluster->name }}</option>
+                            </select>
+                        @else
+                            <select id="cluster" name="cluster"
+                                class="text-gray-900  placeholder-gray-500 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 sm:text-sm rounded-lg block w-full p-2.5">
+                                <option disabled selected>-- Select Cluster Type --</option>
+                                @foreach ($clusters as $cluster)
+                                    <option value="{{ $cluster->id }}">{{ $cluster->name }}</option>
+                                @endforeach
+                            </select>
+                        @endif
+                        @error('cluster')
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
+                                    class="font-medium">Oops!</span>{{ $message }}
+                            </p>
+                        @enderror
                     </div>
                     <button type="submit"
                         class="md:hidden block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"><i

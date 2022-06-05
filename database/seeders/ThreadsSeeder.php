@@ -20,7 +20,7 @@ class ThreadsSeeder extends Seeder
     {
         $users = [];
         for ($i = 0; $i < 5; $i++) {
-            $users[$i] = User::where('id', rand(1, User::count()))->first();
+            $users[$i] = User::where('id', rand(1, User::count() - 1) + 1)->first();
         }
 
         Thread::create([

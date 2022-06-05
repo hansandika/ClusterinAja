@@ -11,6 +11,11 @@ class Request extends Model
     protected $fillable = ['title', 'user_id', 'description', 'request_category_id', 'request_image', 'status'];
     protected $with = ['requestCategory', 'user'];
 
+    public function getImageAttribute()
+    {
+        return 'https://clusterinajabucket.s3.amazonaws.com/requests/' . $this->request_image;
+    }
+
     public function requestCategory()
     {
         return $this->belongsTo(RequestCategory::class);

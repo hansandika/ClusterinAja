@@ -19,12 +19,15 @@ class User extends Authenticatable
      */
     protected $with = ['cluster'];
     protected $fillable = [
+        'name',
         'email',
         'password',
         'profile_image',
         'dob',
         'biography',
-        'cluster_id'
+        'cluster_id',
+        'provider',
+        'provider_id'
     ];
 
     /**
@@ -45,6 +48,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getImageAttribute()
+    {
+        return 'https://clusterinajabucket.s3.amazonaws.com/profile-pictures/' . $this->profile_image;
+    }
 
     public function cluster()
     {

@@ -5,9 +5,7 @@ namespace Database\Seeders;
 use App\Models\Cluster;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Faker\Generator as Faker;
 
 class UsersSeeder extends Seeder
 {
@@ -16,37 +14,32 @@ class UsersSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker $faker)
+    public function run()
     {
         User::create([
+            'name' => 'admin',
             'email' => 'admin@admin.com',
             'password' => bcrypt('admin'),
             'dob' => Carbon::now(),
-            'biography' => $faker->paragraph(),
+            'biography' => 'dummy',
             'cluster_id' => rand(1, Cluster::count())
         ]);
 
         User::create([
+            'name' => 'hans',
             'email' => 'hans@mail.com',
             'password' => bcrypt('hansgeovani2'),
             'dob' => Carbon::now(),
-            'biography' => $faker->paragraph(),
+            'biography' => 'dummy',
             'cluster_id' => rand(1, Cluster::count())
         ]);
 
         User::create([
-            'email' => 'hansandika70@gmail.com',
-            'password' => bcrypt('hansgeovani2'),
-            'dob' => Carbon::now(),
-            'biography' => $faker->paragraph(),
-            'cluster_id' => rand(1, Cluster::count())
-        ]);
-
-        User::create([
+            'name' => 'ryne',
             'email' => 'ryne@gmail.com',
             'password' => bcrypt('ryne2'),
             'dob' => Carbon::now(),
-            'biography' => $faker->paragraph(),
+            'biography' => 'dummy',
             'cluster_id' => rand(1, Cluster::count())
         ]);
     }

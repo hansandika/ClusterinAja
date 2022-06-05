@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\EnsureUserCluster;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
@@ -26,6 +27,8 @@ Route::get("/", [ClusterController::class, 'index'])->name('show-home');
 Route::prefix('/login')->group(function () {
     Route::get('/', [Auth\LoginController::class, 'index'])->name('show-login');
     Route::post('/', [Auth\LoginController::class, 'login'])->name('login');
+    Route::get("/{provider}", [Auth\LoginController::class, 'providerLogin'])->name('provider-login');
+    Route::get("/{provider}/callback", [Auth\LoginController::class, 'providerCallback'])->name('provider-callback');
 });
 
 Route::prefix('/register')->group(function () {
@@ -33,7 +36,7 @@ Route::prefix('/register')->group(function () {
     Route::post('/', [Auth\RegisterController::class, 'register'])->name('register');
 });
 
-Route::prefix('/discussion')->middleware('auth')->group(function () {
+Route::prefix('/discussion')->middleware(['auth', 'auth.cluster'])->group(function () {
     Route::get('/', [ThreadController::class, 'index'])->name('show-thread');
     Route::get('/create', [ThreadController::class, 'create'])->name('create-thread');
     Route::post('/create', [ThreadController::class, 'store'])->name('store-thread');
@@ -43,7 +46,7 @@ Route::prefix('/discussion')->middleware('auth')->group(function () {
     Route::delete("/{thread}", [ThreadController::class, 'destroy'])->name('delete-thread');
 });
 
-Route::prefix('/request')->middleware('auth')->group(function () {
+Route::prefix('/request')->middleware(['auth', 'auth.cluster'])->group(function () {
     Route::get('/', [RequestController::class, 'index'])->name('show-request');
     Route::get('/create', [RequestController::class, 'create'])->name('create-request');
     Route::post('/create', [RequestController::class, 'store'])->name('store-request');

@@ -175,8 +175,7 @@
                         <div class="flex items-center gap-4">
                             @if ($thread->user->profile_image)
                                 <img class="object-cover w-8 h-8 rounded-full"
-                                    src="{{ asset('storage/profile-pictures/' . $thread->user->profile_image) }}"
-                                    alt="">
+                                    src="{{ $thread->user->profile_image }}" alt="">
                             @else
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-gray-400"
                                     viewBox="0 0 20 20" fill="currentColor">
@@ -187,22 +186,21 @@
                             @endif
                             <div>
                                 <h2 class="text-lg">
-                                    {{ substr($thread->user->email, 0, strpos($thread->user->email, '@')) }}</h2>
+                                    {{ $thread->user->name }}
+                                </h2>
                                 <p class="text-sm text-black-200">{{ $thread->user->cluster->name }}</p>
                             </div>
                         </div>
                         @if ($thread->thread_image)
                             <div data-modal-toggle="defaultModal" class="cursor-pointer">
-                                <img class="block object-cover w-36 h-36"
-                                    src="{{ asset('storage/threads/' . $thread->thread_image) }}" alt="">
+                                <img class="block object-cover w-36 h-36" src="{{ $thread->image }}" alt="">
                             </div>
                             <div id="defaultModal" tabindex="-1" aria-hidden="true"
                                 class="fixed top-0 left-0 right-0 z-50 hidden w-full overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
                                 <!-- Modal content -->
                                 <div
                                     class="relative block max-w-2xl mx-auto bg-white rounded-lg shadow dark:bg-gray-700">
-                                    <img src="{{ asset('storage/threads/' . $thread->thread_image) }}"
-                                        class="object-cover w-auto h-screen" alt="">
+                                    <img src="{{ $thread->image }}" class="object-cover w-auto h-screen" alt="">
                                     <button type="button"
                                         class="absolute right-0 top-0 text-gray-400 bg-gray-100 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                                         data-modal-toggle="defaultModal">

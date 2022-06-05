@@ -21,7 +21,7 @@
 
 <body>
     <x-navbar />
-    <main class="bg-blue-100 min-h-screen">
+    <main class="min-h-screen bg-blue-100">
         <x-alert />
         {{ $slot }}
     </main>

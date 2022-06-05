@@ -8,7 +8,7 @@
                     Request</a>
             </div>
             <div class="flex flex-col items-start gap-4 pt-5 md:items-center md:flex-row">
-                <p class="text-black-200">{{ $requests->total() }} Requests</p>
+                <p class="text-black-200">{{ $requests->count() }} Requests</p>
                 <div class="flex flex-wrap items-center gap-4">
                     <a href="{{ route('show-request', 'category=Newest') }}" type="button"
                         class="{{ Request::get('category') == 'Newest' || !Request::get('category') ? 'text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-600 dark:focus:ring-blue-700' : 'text-blue-700 bg-blue-200 hover:bg-blue-300 focus:ring-blue-600' }} focus:ring-2 font-medium rounded-full text-sm px-5 py-2.5 focus:outline-none">Newest</a>
@@ -83,8 +83,7 @@
                         </div>
                         <div class="flex items-center gap-4">
                             @if ($request->user->profile_image)
-                                <img class="object-cover w-8 h-8 rounded-full"
-                                    src="{{ asset('storage/profile-pictures/' . $request->user->profile_image) }}"
+                                <img class="object-cover w-8 h-8 rounded-full" src="{{ $request->user->image }}"
                                     alt="">
                             @else
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-gray-400"
@@ -96,22 +95,21 @@
                             @endif
                             <div>
                                 <h2 class="text-lg">
-                                    {{ substr($request->user->email, 0, strpos($request->user->email, '@')) }}</h2>
+                                    {{ $request->user->name }}
+                                </h2>
                                 <p class="text-sm text-black-200">{{ $request->user->cluster->name }}</p>
                             </div>
                         </div>
                         @if ($request->request_image)
                             <div data-modal-toggle="defaultModal" class="cursor-pointer">
-                                <img class="block object-cover w-36 h-36"
-                                    src="{{ asset('storage/requests/' . $request->request_image) }}" alt="">
+                                <img class="block object-cover w-36 h-36" src="{{ $request->image }}" alt="">
                             </div>
                             <div id="defaultModal" tabindex="-1" aria-hidden="true"
                                 class="fixed top-0 left-0 right-0 z-50 hidden w-full overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
                                 <!-- Modal content -->
                                 <div
                                     class="relative block max-w-2xl mx-auto bg-white rounded-lg shadow dark:bg-gray-700">
-                                    <img src="{{ asset('storage/requests/' . $request->request_image) }}"
-                                        class="object-cover w-auto h-screen" alt="">
+                                    <img src="{{ $request->image }}" class="object-cover w-auto h-screen" alt="">
                                     <button type="button"
                                         class="absolute right-0 top-0 text-gray-400 bg-gray-100 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                                         data-modal-toggle="defaultModal">

@@ -27,6 +27,7 @@ class RegisterController extends Controller
         ]);
 
         $attr['dob'] = date('Y-m-d', strtotime($attr['dob']));
+        $attr['name'] = substr($request->email, 0, strpos($request->email, '@'));
         $attr['cluster_id'] = $attr['cluster'];
         $attr['password'] = bcrypt($attr['password']);
         User::create($attr);

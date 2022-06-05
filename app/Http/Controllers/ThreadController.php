@@ -75,7 +75,8 @@ class ThreadController extends Controller
         if ($request->file('image')) {
             $file = $request->file('image');
             $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('storage/threads'), $filename);
+            $filePath = 'threads/' . $filename;
+            $path = Storage::disk('s3')->put($filePath, file_get_contents($file));
             $attr['thread_image'] = $filename;
         }
         Thread::create($attr);
@@ -112,11 +113,12 @@ class ThreadController extends Controller
 
         if ($request->file('image')) {
             if ($thread->thread_image) {
-                Storage::delete('public/threads/' . $thread->thread_image);
+                Storage::disk('s3')->delete('threads/' . $thread->thread_image);
             }
             $file = $request->file('image');
             $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('storage/threads'), $filename);
+            $filePath = 'threads/' . $filename;
+            $path = Storage::disk('s3')->put($filePath, file_get_contents($file));
             $attr['thread_image'] = $filename;
         }
 
@@ -130,7 +132,7 @@ class ThreadController extends Controller
 
         Comment::where('thread_id', $thread->id)->delete();
         if ($thread->thread_image) {
-            Storage::delete('public/threads/' . $thread->thread_image);
+            Storage::disk('s3')->delete('threads/' . $thread->thread_image);
         }
         $thread->delete();
         return redirect('/discussion')->with('success-info', 'Delete discussion Successfully');

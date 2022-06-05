@@ -19,8 +19,7 @@
                     id="user-menu-button" aria-expanded="false" type="button" data-dropdown-toggle="dropdown">
                     <span class="sr-only">Open user menu</span>
                     @if (Auth::user()->profile_image)
-                        <img class="object-cover w-8 h-8 rounded-full"
-                            src="{{ asset('storage/profile-pictures/' . Auth::user()->profile_image) }}" alt="user photo">
+                        <img class="object-cover w-8 h-8 rounded-full" src="{{ Auth::user()->image }}" alt="user photo">
                     @else
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-400" viewBox="0 0 20 20"
                             fill="currentColor">
@@ -34,8 +33,7 @@
                 <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
                     id="dropdown">
                     <div class="px-4 py-3">
-                        <span
-                            class="block text-sm text-gray-900 dark:text-white">{{ substr(Auth::user()->email, 0, strpos(Auth::user()->email, '@')) }}</span>
+                        <span class="block text-sm text-gray-900 dark:text-white">{{ Auth::user()->name }}</span>
                         <span
                             class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ Auth::user()->email }}</span>
                     </div>
