@@ -174,8 +174,8 @@
                         </div>
                         <div class="flex items-center gap-4">
                             @if ($thread->user->profile_image)
-                                <img class="object-cover w-8 h-8 rounded-full"
-                                    src="{{ $thread->user->profile_image }}" alt="">
+                                <img class="object-cover w-8 h-8 rounded-full" src="{{ $thread->user->image }}"
+                                    alt="">
                             @else
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-gray-400"
                                     viewBox="0 0 20 20" fill="currentColor">
