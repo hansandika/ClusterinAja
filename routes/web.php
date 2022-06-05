@@ -22,7 +22,7 @@ if (App::environment('production')) {
     URL::forceScheme('https');
 }
 
-// Route::get("/", [ClusterController::class, 'index'])->name('show-home');
+Route::get("/", [ClusterController::class, 'index'])->name('show-home');
 
 Route::prefix('/login')->group(function () {
     Route::get('/', [Auth\LoginController::class, 'index'])->name('show-login');
