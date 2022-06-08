@@ -1,4 +1,4 @@
-<nav class="container p-6 bg-white border-gray-200 rounded md:px-12 md:py-6 sm:px-4 dark:bg-gray-800">
+<nav class="p-6 bg-white border-gray-200 rounded md:px-12 md:py-6 sm:px-4 dark:bg-gray-800">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
         <a href="{{ route('show-home') }}" class="flex items-center">
             <img src="{{ asset('img/logo.png') }}" class="h-6 mr-3 sm:h-9" alt="Clusteirn Logo" />
