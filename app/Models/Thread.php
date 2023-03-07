@@ -14,7 +14,7 @@ class Thread extends Model
 
     public function getImageAttribute()
     {
-        return 'https://clusterinajabucket.s3.amazonaws.com/threads/' . $this->thread_image;
+        return asset('storage/threads/' . $this->thread_image);
     }
 
     public function threadCategory()

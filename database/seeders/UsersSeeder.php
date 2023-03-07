@@ -27,7 +27,7 @@ class UsersSeeder extends Seeder
 
         User::create([
             'name' => 'hans',
-            'email' => 'hans@mail.com',
+            'email' => 'hansandika70@gmail.com',
             'password' => bcrypt('hansgeovani2'),
             'dob' => Carbon::now(),
             'biography' => 'dummy',

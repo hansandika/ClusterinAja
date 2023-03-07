@@ -13,7 +13,7 @@ class Request extends Model
 
     public function getImageAttribute()
     {
-        return 'https://clusterinajabucket.s3.amazonaws.com/requests/' . $this->request_image;
+        return asset('storage/requests/' . $this->request_image);
     }
 
     public function requestCategory()
