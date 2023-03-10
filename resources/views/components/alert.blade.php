@@ -21,7 +21,7 @@
         </button>
     </div>
 @endif
-@if (session()->has('error'))
+@if (session()->has('error') || session()->has('errors'))
     <div id="alert-2" class="flex p-4 bg-red-100 rounded-lg dark:bg-red-200" role="alert">
         <svg class="flex-shrink-0 w-5 h-5 text-red-700 dark:text-red-800" fill="currentColor" viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg">
@@ -30,7 +30,13 @@
                 clip-rule="evenodd"></path>
         </svg>
         <div class="ml-3 text-sm font-medium text-red-700 dark:text-red-800">
-            {{ session()->get('error') }}
+            @if (session()->has('errors'))
+                @foreach (session()->get('errors')->all() as $error)
+                    {{ $error }}
+                @endforeach
+            @else
+                {{ session()->get('error') }}
+            @endif
         </div>
         <button type="button"
             class="ml-auto -mx-1.5 -my-1.5 bg-red-100 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex h-8 w-8 dark:bg-red-200 dark:text-red-600 dark:hover:bg-red-300"
